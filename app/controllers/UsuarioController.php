@@ -1,6 +1,9 @@
 <?php
 
 namespace Tf\Controllers;
+
+use Tf\Lib\Biblioteca\Usuario\UsuarioCadastro;
+
 /**
  *
  *
@@ -11,5 +14,17 @@ namespace Tf\Controllers;
  */
 class UsuarioController extends ControllerBase
 {
-    public function indexAction(){}
+    public function indexAction() { }
+
+    public function cadastroAction()
+    {
+        parent::execVolt(new UsuarioCadastro());
+        $this->dispatcher->forward(['action'=>'index']);
+    }
+
+    public function cadastroJsonAction()
+    {
+        return parent::execJson(new UsuarioCadastro());
+    }
+
 }

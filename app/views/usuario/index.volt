@@ -17,15 +17,15 @@
             <div class="sixteen wide column">
                 <h3 class="ui header">Cadastro de Usuário</h3>
                 <div class="ui form">
-                    <form name="" action="" method="post">
+                    <form name="usuario" action="usuario/cadastroJson" method="post">
                         <div class="three fields">
                             <div class="field">
                                 <label>Nome</label>
-                                <input name="nome" type="text" placeholder="Data de saída">
+                                <input name="nome" type="text" value="" placeholder="Nome">
                             </div>
                             <div class="field">
                                 <label>E-mail</label>
-                                <input name="email" type="text" placeholder="Data de devolução">
+                                <input name="email" type="text" placeholder="E-mail">
                             </div>
                             <div class="field">
                                 <label>Senha</label>
@@ -43,6 +43,11 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        {{ content() }}
+    </div>
+
     <div class="row">
         <div class="left aligned column">
             <div class="sixteen wide column">
