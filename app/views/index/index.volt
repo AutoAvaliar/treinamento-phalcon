@@ -14,4 +14,5 @@
     <div class="row">
         Bem vindo ao treinamento Phalcon
     </div>
+    <div class="row">{{ content() }}</div>
 {% endblock %}
