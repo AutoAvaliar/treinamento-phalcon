@@ -17,7 +17,7 @@
             <div class="sixteen wide column">
                 <h3 class="ui header">Cadastro de Usuário</h3>
                 <div class="ui form">
-                    <form name="usuario" action="usuario/cadastroJson" method="post">
+                    <form name="usuario" action="usuario/cadastro" method="post">
                         <div class="three fields">
                             <div class="field">
                                 <label>Nome</label>

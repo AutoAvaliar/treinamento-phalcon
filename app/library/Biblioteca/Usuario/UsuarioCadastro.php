@@ -20,7 +20,7 @@ class UsuarioCadastro extends Component implements MainInterface
      * @var Usuario
      */
     private $model;
-    private $resposta;
+    private $resposta = ['usuario' => false];
 
     public function executar()
     {
@@ -28,11 +28,13 @@ class UsuarioCadastro extends Component implements MainInterface
         $this->validarEntrada();
 
         if ($this->model->save()) {
-            $this->resposta = "Usuário cadastrado com sucesso.";
-            $this->flash->success($this->resposta);
+            $this->resposta['message'] = "Usuário cadastrado com sucesso.";
+            $this->resposta['usuario'] = $this->model->toArray();
+            $this->flash->success($this->resposta['message']);
+
         } else {
-            $this->resposta = "Falha ao cadastrado com sucesso.";
-            $this->flash->error($this->resposta);
+            $this->resposta['message'] = "Falha ao cadastrado com sucesso.";
+            $this->flash->error($this->resposta['message']);
         }
     }
 
@@ -47,13 +49,13 @@ class UsuarioCadastro extends Component implements MainInterface
     {
         $this->model->{$campo} = $this->request->getPost($campo);
         if (empty($this->model->{$campo})) {
-            throw new \Exception($mensagem);
+            throw new \Exception($mensagem,E_USER_ERROR);
         }
     }
 
     public function resposta()
     {
-        return ['status'=>$this->resposta];
+        return $this->resposta;
     }
 
 
