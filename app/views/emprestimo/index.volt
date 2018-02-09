@@ -20,12 +20,16 @@
                     <form name="" action="" method="post">
                         <div class="three fields">
                             <div class="field">
-                                <label>Data de saída</label>
-                                <input name="data_saida" type="text" placeholder="Data de saída">
+                                <label>Usuário</label>
+                                <select name="usuario">
+                                    <option value="1">Usuario 1</option>
+                                </select>
                             </div>
                             <div class="field">
-                                <label>Data de devolução</label>
-                                <input name="data_devolucao" type="text" placeholder="Data de devolução">
+                                <label>Livro</label>
+                                <select name="livro">
+                                    <option value="1">Livro 1</option>
+                                </select>
                             </div>
                         </div>
                         <div class="ui buttons">
