@@ -17,7 +17,7 @@
             <div class="sixteen wide column">
                 <h3 class="ui header">Cadastro de Usuário</h3>
                 <div class="ui form">
-                    <form name="usuario" action="usuario/cadastro" method="post">
+                    <form name="usuario" action="{{ formAction }}" method="post">
                         <div class="three fields">
                             <div class="field">
                                 <label>Nome</label>
@@ -29,7 +29,7 @@
                             </div>
                             <div class="field">
                                 <label>Senha</label>
-                                <input name="senha" type="password" placeholder="Senha">
+                                <input name="senha" type="password" value="{{ usuarioForm.senha }}" placeholder="Senha">
                             </div>
                         </div>
                         <div class="ui buttons">

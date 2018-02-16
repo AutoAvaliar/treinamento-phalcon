@@ -3,6 +3,9 @@
 namespace Tf\Controllers;
 
 use Tf\Lib\Biblioteca\Usuario\UsuarioCadastro;
+use Tf\Lib\Biblioteca\Usuario\UsuarioEditar;
+use Tf\Lib\Biblioteca\Usuario\UsuarioExcluir;
+use Tf\Lib\Biblioteca\Usuario\UsuarioHelper;
 use Tf\Models\Usuario;
 
 /**
@@ -15,10 +18,11 @@ use Tf\Models\Usuario;
  */
 class UsuarioController extends ControllerBase
 {
-    public function onConstruct()
+    public function beforeExecuteRoute($dispatcher)
     {
-        $this->view->usuarioForm = new Usuario();
+        $this->view->usuarioForm = UsuarioHelper::getUser();
         $this->view->usuarios    = Usuario::find();
+        $this->view->formAction  = UsuarioHelper::$formAction;
     }
 
     public function indexAction() { }
@@ -30,21 +34,12 @@ class UsuarioController extends ControllerBase
 
     public function editarAction($id)
     {
-        $this->view->usuarioForm = Usuario::findFirst($id);
-        $this->dispatcher->forward(['action' => 'index']);
+        parent::execVolt(new UsuarioEditar($id));
     }
 
     public function excluirAction($id)
     {
-        $usuario = Usuario::find($id);
-
-        if ($usuario->delete()) {
-            $this->flashSession->success("Usuario excluido com sucesso");
-        } else {
-            $this->flashSession->error("Ops, falha ao excluir usuario.");
-        }
-
-        $this->response->redirect('usuario');
+        parent::execVolt(new UsuarioExcluir($id));
     }
 
     public function cadastroJsonAction()
