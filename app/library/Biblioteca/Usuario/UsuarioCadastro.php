@@ -20,21 +20,20 @@ class UsuarioCadastro extends Component implements MainInterface
      * @var Usuario
      */
     private $model;
-    private $resposta = ['usuario' => false];
+    private $resposta = false;
 
     public function executar()
     {
-        $this->model = new Usuario();
+        $this->model             = new Usuario();
+        $this->view->usuarioForm = $this->model;
+
         $this->validarEntrada();
 
         if ($this->model->save()) {
-            $this->resposta['message'] = "Usuário cadastrado com sucesso.";
-            $this->resposta['usuario'] = $this->model->toArray();
-            $this->flash->success($this->resposta['message']);
-
+            $this->flashSession->success("Usuário cadastrado com sucesso.");
+            $this->resposta = true;
         } else {
-            $this->resposta['message'] = "Falha ao cadastrado com sucesso.";
-            $this->flash->error($this->resposta['message']);
+            $this->flashSession->error("Usuário cadastrado com sucesso.");
         }
     }
 
@@ -49,14 +48,23 @@ class UsuarioCadastro extends Component implements MainInterface
     {
         $this->model->{$campo} = $this->request->getPost($campo);
         if (empty($this->model->{$campo})) {
-            throw new \Exception($mensagem,E_USER_ERROR);
+            throw new \Exception($mensagem, E_USER_ERROR);
         }
     }
 
     public function resposta()
     {
+        if($this->resposta){
+            $this->response->redirect('usuario');
+        }else{
+            $this->dispatcher->forward(['action'=>'index']);
+        }
         return $this->resposta;
+
+
     }
 
 
 }
+//    $this->response->redirect('usuario');
+//    $this->dispatcher->forward(['action' => 'index']);

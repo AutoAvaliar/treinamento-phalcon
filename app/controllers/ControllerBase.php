@@ -12,7 +12,7 @@ class ControllerBase extends Controller
         try {
             $main->executar();
         } catch (\Exception $e) {
-            $this->flash->error($e->getMessage());
+            $this->flashSession->error($e->getMessage());
         }
         return $main->resposta();
     }

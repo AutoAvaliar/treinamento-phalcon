@@ -9,8 +9,8 @@
         {#<div class="ui huge primary button">Início</div>#}
     </div>
 {% endblock %}
-
 {% block content %}
+
     <!--Cadastro de usuario-->
     <div class="row">
         <div class="left aligned column">
@@ -21,11 +21,11 @@
                         <div class="three fields">
                             <div class="field">
                                 <label>Nome</label>
-                                <input name="nome" type="text" value="" placeholder="Nome">
+                                <input name="nome" type="text" value="{{ usuarioForm.nome }}" placeholder="Nome">
                             </div>
                             <div class="field">
                                 <label>E-mail</label>
-                                <input name="email" type="text" placeholder="E-mail">
+                                <input name="email" type="text" value="{{ usuarioForm.email }}" placeholder="E-mail">
                             </div>
                             <div class="field">
                                 <label>Senha</label>
@@ -45,7 +45,7 @@
     </div>
 
     <div class="row">
-        {{ content() }}
+        {{ flashSession.output() }}
     </div>
 
     <div class="row">
@@ -55,6 +55,7 @@
                 <table class="ui compact celled definition table">
                     <thead class="full-width">
                     <tr>
+                        <th>id</th>
                         <th>Nome</th>
                         <th>E-mail</th>
                         <th>Senha</th>
@@ -62,12 +63,17 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Teste</td>
-                        <td>teste@teste.com</td>
-                        <td>123</td>
-                        <td><a href="">editar</a> | <a href="">excluir</a></td>
-                    </tr>
+
+                    {% for usuario in usuarios %}
+                        <tr>
+                            <td>{{ usuario.id }}</td>
+                            <td>{{ usuario.nome }}</td>
+                            <td>{{ usuario.email }}</td>
+                            <td>{{ usuario.senha }}</td>
+                            <td><a href="usuario/editar/{{ usuario.id }}">editar</a> | <a href="usuario/excluir/{{ usuario.id }}">excluir</a></td>
+                        </tr>
+                    {% endfor %}
+
                     </tbody>
 
                 </table>
